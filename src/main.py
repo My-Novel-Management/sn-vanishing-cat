@@ -25,7 +25,8 @@ from config import ASSET
 ################################################################
 
 # Constant
-TITLE = "作品タイトル"
+TITLE = "いつも彼女はいなくなる"
+OUTLINE = "ロボット猫を飼っていたが、ある日突然消えてしまう。見つけて連れ戻すが何故かすぐに出ていってしまう"
 
 
 # Episodes
@@ -41,7 +42,8 @@ def ch_main(w: World):
 
 def main(): # pragma: no cover
     w = World.create_world(f"{TITLE}")
-    w.config.set_outline("__outline__")
+    w.config.set_outline(f"{OUTLINE}")
+    w.config.set_version(0,0,1)
     w.db.set_from_asset(basic.ASSET)
     w.db.set_from_asset(ASSET)
     return w.run(
