@@ -11,7 +11,7 @@ from storybuilder.builder.world import World
 from storybuilder.assets import basic
 from config import ASSET
 # import scenes
-# from scenes import xxx
+from scenes import mainstage
 
 
 ################################################################
@@ -30,20 +30,27 @@ OUTLINE = "ロボット猫を飼っていたが、ある日突然消えてしま
 
 
 # Episodes
-def ep_xxx(w: World):
-    return w.episode('episode_title',
-            outline="description")
-
+def ep_main(w: World):
+    return w.episode('main',
+            mainstage.a_cat(w),
+            mainstage.vanish_her(w),
+            mainstage.lookfor_her(w),
+            mainstage.always_vanish(w),
+            mainstage.friend(w),
+            mainstage.her_inside(w),
+            w.symbol("（了）"),
+            )
 
 def ch_main(w: World):
     return w.chapter('main',
+            ep_main(w),
             )
 
 
 def main(): # pragma: no cover
     w = World.create_world(f"{TITLE}")
     w.config.set_outline(f"{OUTLINE}")
-    w.config.set_version(0,0,1)
+    w.config.set_version(1,0,0)
     w.db.set_from_asset(basic.ASSET)
     w.db.set_from_asset(ASSET)
     return w.run(
